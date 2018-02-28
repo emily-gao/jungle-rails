@@ -2,9 +2,13 @@ Rails.application.routes.draw do
 
   root to: 'products#index'
 
+  # by default: 7 routes are creates
+  # use only to specify your routes if less than 7
   resources :products, only: [:index, :show]
   resources :categories, only: [:show]
 
+  # singular resource
+  # one user can only have one cart at a time
   resource :cart, only: [:show] do
     put    :add_item
     delete :remove_item
@@ -12,6 +16,8 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:create, :show]
 
+  # a way to organize groups of controllers
+  # in other cases, can provide a scope 
   namespace :admin do
     root to: 'dashboard#show'
     resources :products, except: [:edit, :update, :show]
