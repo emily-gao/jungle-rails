@@ -1,0 +1,22 @@
+Order #<%= @order.id %>
+
+Thank you for your order!
+
+<% @order.line_items.map do |line_item| %>
+
+  Product: 
+  <%= line_item.product.name %>
+  <%= line_item.product.description %>
+
+  Unit Price:
+  <%= line_item.product.price %>
+
+  Quantity: 
+  <%= line_item.quantity %>
+
+  Price:
+  <%= line_item.total_price_cents %>
+
+<% end %>
+
+TOTAL: <%= @order.total_cents %>
