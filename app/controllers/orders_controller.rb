@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
 
+  before_filter :authorize
+
   def show
     @order = Order.find(params[:id])
     @line_items = LineItem.where(order_id: params[:id])
@@ -10,6 +12,7 @@ class OrdersController < ApplicationController
     order  = create_order(charge)
 
     if order.valid?
+      OrderMailer.receipt_email(order).deliver_later
       empty_cart!
       redirect_to order, notice: 'Your Order has been placed.'
     else
