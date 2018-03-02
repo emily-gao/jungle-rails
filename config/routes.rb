@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'register', to: 'users#new', as: 'register'
+  get 'login', to: 'sessions#new', as: 'login'
+  delete 'logout', to: 'sessions#destroy', as: 'logout'
+
   root to: 'products#index'
 
   namespace :admin do
