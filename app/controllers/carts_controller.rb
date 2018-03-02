@@ -11,7 +11,7 @@ class CartsController < ApplicationController
     cart[product_id] = item
     update_cart cart
 
-    redirect_to :back
+    redirect_back(fallback_location: root_path)
   end
 
   def remove_item
@@ -23,7 +23,7 @@ class CartsController < ApplicationController
     cart.delete(product_id) if item["quantity"] < 1
     update_cart cart
 
-    redirect_to :back
+    redirect_back(fallback_location: root_path)
   end
 
 end
