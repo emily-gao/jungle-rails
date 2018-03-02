@@ -1,0 +1,53 @@
+<section class="users-new">
+
+  <header class="page-header">
+    <h1>Register</h1>
+  </header>
+
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-1">
+      <%= form_for @user do |form| %>
+
+        <% if form.object.errors.any? %>
+          <div class="alert alert-danger">
+            <strong>The following errors prevented saving:</strong>
+            <ul>
+              <% form.object.errors.full_messages.each do |error| %>
+                <li><%= error %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= form.label 'First Name' %>
+          <%= form.text_field :first_name, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label 'Last Name' %>
+          <%= form.text_field :last_name, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label 'Email' %>
+          <%= form.text_field :email, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label 'Password' %>
+          <%= form.password_field :password, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label 'Password Confirmation' %>
+          <%= form.password_field :password_confirmation, class: 'form-control' %>
+        </div>
+
+        <%= form.submit 'Submit', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+
+</section>
+
