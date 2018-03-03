@@ -13,13 +13,17 @@ Rails.application.routes.draw do
   end
   
   resource :cart, only: [:show] do
-    put    :add_item
+    put :add_item
     delete :remove_item
   end
 
   resources :categories, only: [:show]
   resources :orders, only: [:create, :show]
-  resources :products, only: [:index, :show]
+
+  resources :products, only: [:index, :show] do
+    resources :reviews, only: [:create]
+  end
+
   resources :sessions, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create]
 
