@@ -7,7 +7,6 @@
   <article class="product-detail">
 
     <div class="row">
-
       <div class="col-sm-4">
         <%= image_tag @product.image.url, class: 'main-img' %>
       </div>
@@ -25,21 +24,50 @@
         </dl>
       </div>
     </div>
+  
+    <div class="row">
+      <div class="col-sm-12">
+        <dl class="dl-horizontal">
+          <dt><h4>Rate This Product</h4></dt>
+          <dd></dd>
+          <%= form_for [@product, @review] do |f| %>
+          
+              <div class="form-group">
+                <dt><%= f.label :rating %></dt>
+                <dd><%= f.select :rating, (1..5), class: 'form-control' %><dd>
+              </div>
 
-  <div class="row">
-    <div class="col-sm-12">
-      <dl class="dl-horizontal">
-        <% @product.reviews.each do |review| %>
-          <dt>Rating</dt>
-          <dd><%= review.rating %></dd>
-          <dt>User</dt>
-          <dd><%= review.user.first_name + review.user.last_name %></dd>
-          <dt>Description</dt>
-          <dd><%= review.description %></dd>
-        <% end %>
-      </dl>
+              <div class="form-group">
+                <dt><%= f.label :description %></dt>
+                <dd><%= f.text_field :description, class: 'form-control' %></dd>
+              </div>    
+
+            <dd><%= f.submit 'Submit', class: 'btn btn-primary' %></dd>
+          <% end %>
+        </div>
+      </div>
     </div>
-  </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <dl class="dl-horizontal">
+          <% @product.reviews.order(updated_at: :desc).each do |review| %>
+            <div class="review">
+              <dt>Rating</dt>
+              <dd><%= review.rating %></dd>
+              <dt>User</dt>
+              <dd><%= review.user.first_name + ' ' + review.user.last_name %></dd>
+              <dt>Description</dt>
+              <dd><%= review.description %></dd>
+
+              <% if current_user && current_user.id == review.user_id %>
+              <dd><%= link_to 'Delete', [@product, review], method: :delete %></dd>
+              <% end %>
+            </div>
+          <% end %>
+        </dl>
+      </div>
+    </div>
 
   </article>
 
