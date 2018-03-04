@@ -78,12 +78,19 @@ main section.categories-show {
 }
 
 main section.products-show {
-
+  
   .product-detail {
+    
     img.main-img {
       max-width: 100%;
     }
+
+    .review {
+      margin: 15px 0;
+    }
+
   }
+
 }
 
 

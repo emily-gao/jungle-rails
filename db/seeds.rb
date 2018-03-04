@@ -132,5 +132,47 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+puts "Re-creating Users ..."
+
+User.destroy_all
+
+User.create!({
+  first_name: 'Rachel',
+  last_name: 'Ray',
+  email: 'rachel@gmail.com',
+  password_digest: User.digest('rachel')
+})
+
+User.create!({
+  first_name: 'Jackie',
+  last_name: 'Jay',
+  email: 'jackie@gmail.com',
+  password_digest: User.digest('jackie')
+})
+
+puts "Re-creating Reviews ..."
+
+Review.destroy_all
+
+Review.create!({
+  user_id: 1,
+  product_id: 2,
+  rating: 5,
+  description: 'Love it!'
+})
+
+Review.create!({
+  user_id: 1,
+  product_id: 2,
+  rating: 1,
+  description: "Can this product be any worse?!!!"
+})
+
+Review.create!({
+  user_id: 2,
+  product_id: 1,
+  rating: 3,
+  description: 'Good product at this price'
+})
 
 puts "DONE!"
